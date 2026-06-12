@@ -5,12 +5,12 @@
 - Weapon ID: `traditional-ak47-type3`
 - 显示名称: AK-47 Type 3
 - 版本/变体: 传统固定木托、铣削机匣版本
-- 建模目标: 第一人称武器展示用外观级模型
-- 参数文档状态: profile pass 3c 低模基线已构建
+- 建模目标: 360°动态武器展示 + 第一人称使用的外观级模型
+- 参数文档状态: 360 pass4c 展示细化已构建；仍非最终高模
 - 对应 Blender 文件: `assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend`
 - Godot 导出路径: `assets/blender/exports/godot/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
 - Godot 运行时路径: `apps/arms-game/assets/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
-- 最近更新: 2026-06-12 16:51
+- 最近更新: 2026-06-12 17:41
 
 ## 工作原则
 
@@ -18,7 +18,39 @@
 - 此模型文件只服务 `traditional-ak47-type3`，不混放其他武器。
 - `.blend`、`.glb`、贴图和预览图不提交 Git，只通过 `make backup-models` 压缩备份。
 - 每次调整整体比例、零件尺寸、零件位置、挂点或导出设置，都必须更新“参数调整记录”。
-- 参数以视觉还原和游戏使用为目标，不记录制造级内部结构、公差或可制造图纸。
+- 参数以 360°视觉还原、动态旋转展示和游戏使用为目标，不记录制造级内部结构、公差或可制造图纸。
+
+## 360°展示级质量门槛
+
+```text
+目标:
+  - 玩家可通过鼠标旋转，从任意角度查看武器。
+  - 模型不能只依赖侧面剪影或第一人称可见区域。
+  - 每个主要零件必须有可读的厚度、倒角、前后端面、左右侧面、顶面和底面。
+
+最低检查视角:
+  - 左侧正交
+  - 右侧正交
+  - 顶视正交
+  - 底视正交
+  - 前 3/4
+  - 后 3/4
+
+主要零件要求:
+  - 机匣: 需要完整盒体厚度、顶/底面层次、左右侧细节和端面过渡。
+  - 机匣盖: 不能只是侧面轮廓，需要可从上方读出的弧面/折面体积。
+  - 木托: 需要椭圆化/倒角后的立体体积，不只是一块扁板。
+  - 上下护木: 需要左右厚度、圆角体积和端面过渡。
+  - 手枪握把: 需要符合握把的前后厚度和底部端面。
+  - 弹匣: 需要 360°曲面、前后筋条、侧面压筋、底板和供弹口；方向必须底部朝枪口方向 -Y 前弯。
+  - 枪管/导气系统/准星座/表尺: 需要从侧面、上方、3/4 都能识别，不只是一组方块。
+  - 小件: 选择杆、拉机柄、扳机护圈、背带环等应有基础厚度和投影。
+
+当前 pass4c 状态:
+  - 已从 pass3c 低模基线推进到 360°展示细化 pass。
+  - 已补充顶面、底面、端面、小件厚度和六视角预览。
+  - 仍不是最终高模；曲面拓扑、真实凹槽、贴图和细节比例还需要后续人工/半手工精化。
+```
 
 ## 整体基准参数
 
@@ -324,7 +356,7 @@ Blender 上向: +Z
 - 机匣侧面需要大型铣削减重槽。
 - 固定木枪托、木质上下护木和传统外观枪口螺母。
 - 不使用 AKM 斜切补偿器。
-- 重点服务第一人称近景观感，机匣盖、护木、表尺、准星和弹匣曲率优先级高。
+- 重点服务 360°动态展示和第一人称近景观感，机匣盖、护木、表尺、准星、底面结构和弹匣曲率优先级高。
 
 ## 参数假设
 
@@ -513,6 +545,128 @@ pass3c 预览输出:
   3/4 预览: assets/blender/previews/traditional-ak47-type3-profile-pass3c-3q.png
 ```
 
+## 360 pass4c 展示细化参数
+
+pass4 / pass4b / pass4c 的目标是把模型从“侧面和 3/4 可读的低模基线”推进到“用户可旋转查看的展示模型”。本阶段直接在 Blender 场景中补全顶面、底面、端面和小件厚度，不只优化第一人称可见区域。
+
+```text
+建模方法:
+  - 保留 profile pass 3c 的主体比例和弹匣方向。
+  - 在独立零件对象上叠加 360°可见面细节。
+  - 使用 Mesh / Curve + bevel + weighted normals 表达外观细节。
+  - 每个新增对象都写入 weapon_id、model_stage 和 part_id 自定义属性。
+  - model_stage: 360_pass4c_showcase_refine。
+```
+
+```text
+场景统计:
+  weapon objects: 153
+  mesh objects: 100
+  curve objects: 48
+  empty objects: 5
+  pass4c 新增对象: 34
+  pass4c 新增展示 pivot: ak47t3_display_turntable_pivot
+```
+
+```text
+整体包围盒:
+  bbox_min: x=-0.0430, y=-0.5885, z=-0.3260
+  bbox_max: x=0.0513, y=0.3500, z=0.1200
+  bbox_dims: x=0.0943, y=0.9385, z=0.4460
+  说明:
+    - y 轴总长包含枪口前缘和托底板细节。
+    - z 轴高度包含弹匣底板和准星/表尺上方细节。
+```
+
+```text
+pass4c 重点新增/调整对象:
+  机匣底面与弹匣井:
+    ak47t3_pass4c_receiver_bottom_beveled_plate
+    ak47t3_pass4c_receiver_magwell_front_lip
+    ak47t3_pass4c_receiver_magwell_rear_lip
+    ak47t3_pass4c_receiver_top_cover_front_step
+    ak47t3_pass4c_receiver_top_rear_button
+
+  扳机与底部结构:
+    ak47t3_pass4c_trigger_guard_side_xm017
+    ak47t3_pass4c_trigger_guard_side_xp017
+    ak47t3_pass4c_trigger_guard_front_pin
+    ak47t3_pass4c_trigger_guard_rear_pin
+    ak47t3_pass4c_trigger_curved_blade
+    ak47t3_pass4c_magazine_release_paddle
+
+  弹匣 360°细节:
+    ak47t3_pass4c_magazine_front_locking_lug
+    ak47t3_pass4c_magazine_rear_locking_lug
+    ak47t3_pass4c_magazine_side_top_fold_xm027
+    ak47t3_pass4c_magazine_side_top_fold_xp027
+    ak47t3_pass4c_magazine_floorplate_front_lip
+    ak47t3_pass4c_magazine_floorplate_rear_lip
+
+  木件顶/底与端面:
+    ak47t3_pass4c_stock_bottom_center_cut
+    ak47t3_pass4c_stock_top_rear_grain
+    ak47t3_pass4c_stock_buttplate_rounded_edge_top
+    ak47t3_pass4c_stock_buttplate_rounded_edge_bottom
+    ak47t3_pass4c_lower_handguard_bottom_left_groove
+    ak47t3_pass4c_lower_handguard_bottom_right_groove
+    ak47t3_pass4c_upper_handguard_top_left_groove
+    ak47t3_pass4c_upper_handguard_top_right_groove
+
+  前端与瞄具:
+    ak47t3_pass4c_muzzle_front_face_ring
+    ak47t3_pass4c_muzzle_bore_dark_inner
+    ak47t3_pass4c_front_sight_bridge
+    ak47t3_pass4c_rear_sight_axis_pin
+    ak47t3_pass4c_rear_sight_slider_block
+
+  背带环:
+    ak47t3_pass4c_front_sling_base
+    ak47t3_pass4c_front_sling_loop
+    ak47t3_pass4c_rear_sling_base
+    ak47t3_pass4c_rear_sling_loop
+```
+
+```text
+pass4c 材质:
+  金属: ak47t3_pass4c_oiled_blued_steel，Base Color=(0.018, 0.020, 0.017, 1)，Roughness=0.58，Metallic=0.82
+  磨损边: ak47t3_pass4c_bright_worn_edges，Base Color=(0.115, 0.111, 0.098, 1)，Roughness=0.61，Metallic=0.62
+  阴影: ak47t3_pass4c_deep_shadow，Base Color=(0.004, 0.004, 0.004, 1)，Roughness=0.88
+  木纹/切线: ak47t3_pass4c_dark_wood_cuts，Base Color=(0.082, 0.028, 0.010, 1)，Roughness=0.75
+```
+
+```text
+pass4c 六视角预览输出:
+  右侧正交: assets/blender/previews/traditional-ak47-type3-360-pass4c-right.png
+  左侧正交: assets/blender/previews/traditional-ak47-type3-360-pass4c-left.png
+  顶视正交: assets/blender/previews/traditional-ak47-type3-360-pass4c-top.png
+  底视正交: assets/blender/previews/traditional-ak47-type3-360-pass4c-bottom.png
+  前 3/4: assets/blender/previews/traditional-ak47-type3-360-pass4c-front_3q.png
+  后 3/4: assets/blender/previews/traditional-ak47-type3-360-pass4c-rear_3q.png
+```
+
+```text
+pass4c 文件大小:
+  .blend: 219991 bytes
+  Godot 导出 GLB: 479064 bytes
+  Godot 运行时 GLB: 479064 bytes
+  右侧预览: 2733386 bytes
+  左侧预览: 2556424 bytes
+  顶视预览: 1998917 bytes
+  底视预览: 2018314 bytes
+  前 3/4 预览: 2685809 bytes
+  后 3/4 预览: 2693739 bytes
+```
+
+```text
+pass4c 局限:
+  - 仍属于程序化/半程序化展示细化，不是最终高模。
+  - 机匣盖、护木、握把和弹匣仍需要更干净的拓扑与真实曲面。
+  - Type 3 铣削凹槽目前仍以外贴/叠加细节表达，没有做真实布尔切割或烘焙法线。
+  - 木纹仍是几何线/基础材质，不是最终贴图。
+  - 后续需要在 Godot 中做实际 turntable / 鼠标旋转展示验证。
+```
+
 ## 参考来源
 
 - Small Arms Survey AK-47 识别资料：`https://www.smallarmssurvey.org/sites/default/files/SAS-weapons-assault-rifles-Kalashnikov-AK-47.pdf`
@@ -664,6 +818,54 @@ pass3c 预览输出:
 备份批次: model-backups/20260612-165035-blender-models.zip
 ```
 
+### 2026-06-12 17:41
+
+```text
+对应 Blender 文件: assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend
+调整对象: AK-47 Type 3 360 pass4c 展示细化
+调整前:
+  - profile pass 3c 主要解决侧面轮廓、3/4 轮廓和弹匣方向问题。
+  - pass4b 已补充部分顶面/底面/左右侧细节，但顶/底展示仍有可读性不足。
+  - 用户明确要求后续做动态武器展示，不能只按第一人称可见区域精模。
+调整后:
+  - 保留 pass3c 主体比例和弹匣向 -Y 前弯方向。
+  - 新增/整理 34 个 pass4c 对象，覆盖机匣底面、弹匣井、扳机护圈、扳机、弹匣卡榫、弹匣底板、木件顶/底沟槽、枪口前脸、准星/表尺小件和背带环。
+  - 增加 ak47t3_display_turntable_pivot，作为后续 Godot 鼠标旋转展示的中心参考。
+  - 重新设置 360°检查相机，输出右侧、左侧、顶视、底视、前 3/4、后 3/4 六张预览图。
+  - 重新导出 GLB 并同步到 Godot 运行时路径。
+调整原因:
+  - 模型需要支持用户 360°旋转查看，顶/底/前/后/左右都要有基础体积和细节。
+  - 不能只做第一人称视角中的“近景可见面”。
+验证方式:
+  - 独立 BlenderMCP 端口 9877 执行 pass4c 脚本成功。
+  - Blender 场景统计:
+    weapon objects=153
+    mesh objects=100
+    curve objects=48
+    empty objects=5
+    pass4c objects=34
+  - 包围盒验证:
+    bbox_min=(-0.0430, -0.5885, -0.3260)
+    bbox_max=(0.0513, 0.3500, 0.1200)
+    bbox_dims=(0.0943, 0.9385, 0.4460)
+  - 文件输出验证:
+    .blend=219991 bytes
+    导出 GLB=479064 bytes
+    Godot 运行时 GLB=479064 bytes
+  - 预览输出验证:
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-right.png
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-left.png
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-top.png
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-bottom.png
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-front_3q.png
+    assets/blender/previews/traditional-ak47-type3-360-pass4c-rear_3q.png
+  - make backup-models 成功生成模型备份压缩包。
+局限:
+  - 当前是 360°展示方向的细化 pass，不是最终高模。
+  - 仍需要后续人工/半手工精化曲面、拓扑、真实凹槽、贴图和 Godot 动态展示验证。
+备份批次: model-backups/20260612-174100-blender-models.zip
+```
+
 ## 下一步细化记录
 
 ```text
@@ -676,16 +878,19 @@ pass3c 预览输出:
   - 添加基本木纹方向和材质区分。
   - 添加第一人称握持点、瞄准点、枪口点和弹匣插槽空对象。
   - 重建 profile pass 3c 作为当前低模基线。
+  - 补充 360 pass4c 展示细化，包括顶/底/端面、小件厚度和六视角预览。
+  - 增加 ak47t3_display_turntable_pivot 作为动态展示旋转中心参考。
 
 优先级 1:
+  - 在 Godot 中创建 360°动态展示场景，验证鼠标旋转、相机距离、灯光和模型 pivot。
   - 在 Godot 中创建导入检查场景，验证 GLB 尺寸、朝向、挂点和第一人称持枪位置。
   - 从第一人称视角检查机匣盖、表尺、准星、护木和弹匣遮挡关系。
   - 根据 Godot 检查结果微调 muzzle_point、aim_point、grip_point 和 magazine_socket。
 
 优先级 2:
-  - 将机匣盖、导气箍、准星座、表尺从低模轮廓提升为更干净的曲面/半精模。
-  - 细化扳机护圈、扳机、弹匣卡榫、选择杆和右侧拉机柄。
-  - 优化弹匣筋条、底板和供弹口形状。
+  - 将机匣盖、导气箍、准星座、表尺从当前展示细化提升为更干净的曲面/半精模。
+  - 将 Type 3 铣削减重槽从外贴视觉件升级为更真实的凹槽/法线表现。
+  - 优化弹匣筋条、底板、供弹口和侧面压筋的真实比例。
 
 优先级 3:
   - 添加第一人称展示用相机、手臂占位和基础持枪姿态。

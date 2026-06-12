@@ -13,7 +13,7 @@
 
 ## 武器列表
 
-- `traditional-ak47-type3`：AK-47 Type 3 传统固定木托版本，当前状态 `modeling`。已完成 profile pass 3c 低模基线，本地导出物已同步到 Godot 运行时目录。参数记录见 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`。
+- `traditional-ak47-type3`：AK-47 Type 3 传统固定木托版本，当前状态 `modeling`。已完成 360 pass4c 展示细化，本地导出物已同步到 Godot 运行时目录；仍需后续 Godot 动态展示验证和人工/半手工高模精化。参数记录见 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`。
 
 后续建议记录格式：
 
