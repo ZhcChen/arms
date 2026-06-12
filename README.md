@@ -24,6 +24,7 @@ arms/
 - Godot 项目：打开 `apps/arms-game/project.godot`
 - Blender 资产模块：查看 `assets/blender/README.md`
 - 资产制作流程：查看 `assets/blender/docs/pipeline.md`
+- AK-47 Type 3 参数记录：查看 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`
 - BlenderMCP 状态：查看 `assets/blender/docs/blender-mcp.md`
 - 模型文件备份：运行 `make backup-models`，再把 `model-backups/` 里的压缩包手动上传云盘
 

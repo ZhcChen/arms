@@ -13,7 +13,7 @@
 
 ## 武器列表
 
-暂无真实武器资产。
+- `traditional-ak47-type3`：AK-47 Type 3 传统固定木托版本。参数记录见 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`。
 
 后续建议记录格式：
 
@@ -22,6 +22,7 @@ ID:
 显示名称:
 类型:
 状态:
+参数记录:
 Blender 源文件:
 Godot 导出物:
 预览图:
@@ -29,4 +30,4 @@ Godot 导出物:
 备注:
 ```
 
-注意：`Blender 源文件`、`Godot 导出物` 和 `预览图` 记录的是本地相对路径，不代表文件会提交到 Git。真实模型资产通过 `make backup-models` 进入本地压缩包，再人工上传云盘。
+注意：`Blender 源文件`、`Godot 导出物` 和 `预览图` 记录的是本地相对路径，不代表文件会提交到 Git。真实模型资产通过 `make backup-models` 进入本地压缩包，再人工上传云盘。每个正式武器都必须有独立参数记录文档。
