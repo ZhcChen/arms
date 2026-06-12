@@ -6,11 +6,11 @@
 - 显示名称: AK-47 Type 3
 - 版本/变体: 传统固定木托、铣削机匣版本
 - 建模目标: 第一人称武器展示用外观级模型
-- 参数文档状态: 初始参数整理
+- 参数文档状态: initial blockout 已构建
 - 对应 Blender 文件: `assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend`
 - Godot 导出路径: `assets/blender/exports/godot/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
 - Godot 运行时路径: `apps/arms-game/assets/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
-- 最近更新: 2026-06-12
+- 最近更新: 2026-06-12 15:50
 
 ## 工作原则
 
@@ -315,7 +315,7 @@ Blender 上向: +Z
 
 阶段 2: 整体 blockout
 目标: 用简单几何建立 0.880 m 总长比例骨架。
-完成标准: 机匣、枪管、枪托、护木、弹匣的体块比例合理。
+完成标准: 已完成初始版本；机匣、枪管、枪托、护木、弹匣的体块比例可在 Blender 中检查。
 
 阶段 3: 零件拆分建模
 目标: 将主要外露零件拆为独立对象并细化外形。
@@ -338,4 +338,49 @@ Blender 上向: +Z
 调整原因: 开始 AK-47 Type 3 建模前先固化参数记录流程
 验证方式: 文档审阅；尚未创建正式 .blend 模型
 备份批次: 无
+```
+
+### 2026-06-12 15:48
+
+```text
+对应 Blender 文件: assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend
+调整对象: 初始整体 blockout 与主要外露零件
+调整前: 只有参数文档；无正式 .blend 模型
+调整后:
+  - 创建 1:1 米制 Blender 文件。
+  - 设置枪口方向为 -Y。
+  - 建立 0.880 m 总长参考线。
+  - 建立 0.416 m 枪管基准。
+  - 创建 32 个场景对象，其中包含 30 个模型/文本参考对象、1 个灯光、1 个相机。
+  - 拆分创建机匣、机匣盖、减重槽标记、快慢机拨杆、枪管、枪口螺母、导气管、导气箍、准星座、表尺、枪托、上下护木、握把、扳机护圈、弹匣曲线体、通条和背带环标记。
+  - 添加基础金属、木材、黑色阴影和蓝色尺寸参考材质。
+  - 导出 GLB 到 assets/blender/exports/godot/weapons/traditional-ak47-type3/traditional-ak47-type3.glb。
+  - 同步 GLB 到 apps/arms-game/assets/weapons/traditional-ak47-type3/traditional-ak47-type3.glb。
+  - 生成侧面预览图 assets/blender/previews/traditional-ak47-type3-blockout-side.png。
+调整原因: 开始 AK-47 Type 3 建模阶段 2，先用简单几何建立可检查整体比例。
+验证方式:
+  - 独立 BlenderMCP 端口 9877 执行建模脚本成功。
+  - Blender 场景信息返回 object_count=32、materials_count=8。
+  - 确认 .blend 文件约 123K，导出 .glb 文件约 376K，侧面预览图约 947K。
+  - 侧面预览显示整体 AK 轮廓已经成型，但枪托、护木、机匣减重槽和弹匣仍为 blockout 级，需要下一阶段细化。
+  - make backup-models 成功打包 .blend、导出 GLB、Godot 运行时 GLB 和侧面预览图。
+备份批次: model-backups/20260612-155041-blender-models.zip
+```
+
+## 下一步细化记录
+
+```text
+优先级 1:
+  - 调整枪托外形，从长方体改为 AK Type 3 固定木托轮廓。
+  - 细化铣削机匣侧面大型减重槽，替换当前黑色标记块。
+  - 细化上下护木弧面。
+
+优先级 2:
+  - 优化弹匣曲率和厚度。
+  - 调整准星座、导气箍、照门座高度关系。
+  - 添加基本木纹方向或材质区分。
+
+优先级 3:
+  - 添加第一人称握持点、瞄准点、枪口点空对象。
+  - 在 Godot 中创建导入检查场景。
 ```

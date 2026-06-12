@@ -13,7 +13,7 @@
 
 ## 武器列表
 
-- `traditional-ak47-type3`：AK-47 Type 3 传统固定木托版本。参数记录见 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`。
+- `traditional-ak47-type3`：AK-47 Type 3 传统固定木托版本，当前状态 `blockout`。参数记录见 `assets/blender/catalog/weapons/traditional-ak47-type3-parameters.md`。
 
 后续建议记录格式：
 
