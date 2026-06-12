@@ -6,11 +6,11 @@
 - 显示名称: AK-47 Type 3
 - 版本/变体: 传统固定木托、铣削机匣版本
 - 建模目标: 第一人称武器展示用外观级模型
-- 参数文档状态: refine pass 1 已构建
+- 参数文档状态: profile pass 3c 低模基线已构建
 - 对应 Blender 文件: `assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend`
 - Godot 导出路径: `assets/blender/exports/godot/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
 - Godot 运行时路径: `apps/arms-game/assets/weapons/traditional-ak47-type3/traditional-ak47-type3.glb`
-- 最近更新: 2026-06-12 16:08
+- 最近更新: 2026-06-12 16:51
 
 ## 工作原则
 
@@ -55,7 +55,7 @@ Blender 上向: +Z
 ```text
 对象命名: ak47t3_muzzle_point
 用途: 枪口特效、弹道/射线起点参考
-位置: x=0.000, y=-0.582, z=0.000
+位置: x=0.000, y=-0.578, z=-0.001
 类型: Blender Empty
 备注: 位于枪口螺母前方，沿 -Y 为出射方向
 ```
@@ -63,7 +63,7 @@ Blender 上向: +Z
 ```text
 对象命名: ak47t3_aim_point
 用途: 瞄准线前参考点
-位置: x=0.000, y=-0.535, z=0.104
+位置: x=0.000, y=-0.536, z=0.103
 类型: Blender Empty
 备注: 暂放在准星柱顶部；后续 Godot 第一人称视角验证后可微调
 ```
@@ -71,7 +71,7 @@ Blender 上向: +Z
 ```text
 对象命名: ak47t3_grip_point
 用途: 第一人称右手/主手持握参考
-位置: x=0.000, y=-0.002, z=-0.108
+位置: x=0.000, y=0.012, z=-0.102
 类型: Blender Empty
 备注: 暂放在手枪握把内部中心偏上位置
 ```
@@ -79,7 +79,7 @@ Blender 上向: +Z
 ```text
 对象命名: ak47t3_magazine_socket
 用途: 弹匣装配/换弹动画参考
-位置: x=0.000, y=-0.140, z=-0.052
+位置: x=0.000, y=-0.112, z=-0.047
 类型: Blender Empty
 备注: 暂放在弹匣顶部供弹口附近
 ```
@@ -93,13 +93,13 @@ Blender 上向: +Z
 中文名称: 铣削机匣
 英文名称: milled receiver
 对象命名: ak47t3_receiver
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 根据总长和枪管位置推导；需保留 Type 3 大型铣削减重槽
 位置参数: 全枪主体参考件
 材质: 深色磷化/烤蓝金属
-备注: Type 3 的关键识别件；refine pass 1 已添加侧面凹槽视觉 inset 和 bevel 框
+备注: Type 3 的关键识别件；profile pass 3c 已重建较长扁的铣削机匣轮廓和斜向减重槽
 ```
 
 ```text
@@ -107,13 +107,13 @@ Blender 上向: +Z
 中文名称: 机匣盖
 英文名称: receiver cover
 对象命名: ak47t3_receiver_cover
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 覆盖机匣上方，按外观比例推导
 位置参数: 机匣上方
 材质: 深色金属
-备注: 第一人称视角可见度高
+备注: profile pass 3c 已改为带弧面视觉的机匣盖，后续仍需精化曲面
 ```
 
 ```text
@@ -121,13 +121,13 @@ Blender 上向: +Z
 中文名称: 快慢机拨杆
 英文名称: selector lever
 对象命名: ak47t3_selector_lever
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: medium
 尺寸参数: 右侧长条薄片，按外观比例推导
 位置参数: 机匣右侧
 材质: 深色金属
-备注: 需要避免贴平导致阴影丢失
+备注: profile pass 3c 保留右侧快慢机视觉，并添加右侧拉机柄
 ```
 
 ### 枪管、导气与瞄具
@@ -137,7 +137,7 @@ Blender 上向: +Z
 中文名称: 枪管
 英文名称: barrel
 对象命名: ak47t3_barrel
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 初始长度 0.416 m，直径按外观比例推导
@@ -151,7 +151,7 @@ Blender 上向: +Z
 中文名称: 枪口螺母
 英文名称: muzzle nut
 对象命名: ak47t3_muzzle_nut
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: medium
 尺寸参数: 枪口短圆柱件
@@ -165,13 +165,13 @@ Blender 上向: +Z
 中文名称: 导气箍
 英文名称: gas block
 对象命名: ak47t3_gas_block
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 按枪管和导气管位置推导
 位置参数: 枪管前段上方连接导气管
 材质: 深色金属
-备注: 外形影响 AK 轮廓
+备注: profile pass 3c 已替换为斜面导气箍低模轮廓
 ```
 
 ```text
@@ -179,7 +179,7 @@ Blender 上向: +Z
 中文名称: 导气管
 英文名称: gas tube
 对象命名: ak47t3_gas_tube
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 位于枪管上方，连接导气箍与照门座区域
@@ -193,13 +193,13 @@ Blender 上向: +Z
 中文名称: 准星座
 英文名称: front sight block
 对象命名: ak47t3_front_sight_block
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 按枪口附近轮廓推导
 位置参数: 枪管前端上方
 材质: 深色金属
-备注: refine pass 1 已建出准星座底座、左右护耳和准星柱
+备注: profile pass 3c 已重建更窄的准星座底座和护耳
 ```
 
 ```text
@@ -207,13 +207,13 @@ Blender 上向: +Z
 中文名称: 表尺
 英文名称: rear sight leaf
 对象命名: ak47t3_rear_sight_leaf
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 按照门座长度推导
 位置参数: 机匣前上方
 材质: 深色金属
-备注: refine pass 1 已建表尺底座、表尺叶片和缺口阴影
+备注: profile pass 3c 已保留表尺底座和表尺叶片，仍需后续细化刻度/缺口
 ```
 
 ### 木质件
@@ -223,13 +223,13 @@ Blender 上向: +Z
 中文名称: 固定木枪托
 英文名称: fixed wood stock
 对象命名: ak47t3_stock
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 根据总长和机匣后部位置推导
 位置参数: 机匣后方
 材质: 琥珀色清漆木材
-备注: refine pass 1 已从长方体改为带下垂趾部的固定木托轮廓
+备注: profile pass 3c 已重建为更低、更长、更贴近 AK 固定木托的侧面轮廓
 ```
 
 ```text
@@ -237,13 +237,13 @@ Blender 上向: +Z
 中文名称: 下护木
 英文名称: lower handguard
 对象命名: ak47t3_lower_handguard
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 位于机匣前方下侧，按外观比例推导
 位置参数: 枪管下方、机匣前方
 材质: 琥珀色清漆木材
-备注: refine pass 1 已改为多段圆角外形，并添加简化木纹线
+备注: profile pass 3c 已重建为较扁的下护木轮廓，并保留简化沟槽/木纹线
 ```
 
 ```text
@@ -251,13 +251,13 @@ Blender 上向: +Z
 中文名称: 上护木
 英文名称: upper handguard
 对象命名: ak47t3_upper_handguard
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 包覆导气管区域，按外观比例推导
 位置参数: 枪管上方、导气管外侧
 材质: 琥珀色清漆木材
-备注: refine pass 1 已改为上拱圆角外形，并添加简化木纹线
+备注: profile pass 3c 已重建为较扁的上护木轮廓，并保留简化沟槽/木纹线
 ```
 
 ```text
@@ -265,13 +265,13 @@ Blender 上向: +Z
 中文名称: 手枪握把
 英文名称: pistol grip
 对象命名: ak47t3_pistol_grip
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 根据第一人称手部占位推导
 位置参数: 机匣下方后部
 材质: 木材或早期深色握把材质，后续参考确认
-备注: refine pass 1 已改为后倾握把轮廓，并设置 grip_point
+备注: profile pass 3c 已重建为更少三角感的木质握把轮廓，并设置 grip_point
 ```
 
 ### 弹匣与小件
@@ -281,13 +281,13 @@ Blender 上向: +Z
 中文名称: 30 发弯弹匣
 英文名称: 30-round curved magazine
 对象命名: ak47t3_magazine_30rd
-建模状态: refine_pass1
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: hero
 尺寸参数: 按 7.62x39 AK 弹匣外形比例推导
 位置参数: 机匣下方前部
 材质: 深色金属
-备注: refine pass 1 已替换为曲线截面网格并添加前后筋条和横向加强筋
+备注: profile pass 3c 已修正弹匣方向，底部朝枪口方向 -Y 前弯；保留前后筋条和中部压筋
 ```
 
 ```text
@@ -295,7 +295,7 @@ Blender 上向: +Z
 中文名称: 扳机护圈
 英文名称: trigger guard
 对象命名: ak47t3_trigger_guard
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: medium
 尺寸参数: 按机匣下方比例推导
@@ -309,7 +309,7 @@ Blender 上向: +Z
 中文名称: 通条
 英文名称: cleaning rod
 对象命名: ak47t3_cleaning_rod
-建模状态: blockout
+建模状态: profile_pass3c_baseline
 是否独立对象: yes
 可见级别: medium
 尺寸参数: 枪管下方细长杆
@@ -439,6 +439,80 @@ Blender 上向: +Z
   预览色彩管理: Filmic / Medium High Contrast / Exposure=-0.8
 ```
 
+## profile pass 3c 低模基线参数
+
+profile pass 2 / 3 的目标是修正 pass 1 “不成形”和弹匣方向错误的问题。当前 pass 3c 作为低模基线，而不是最终精模。
+
+```text
+建模方法:
+  - 清空旧 AK 对象后重建，避免在错误 blockout 上继续叠加。
+  - 先保证侧面轮廓成立，再用 x 方向厚度、倒角和简化细节补 3D 体积。
+  - 以 -Y 为枪口方向；弹匣底部必须朝 -Y 方向前弯。
+  - 使用 profile prism / tapered prism / curve bevel 组合生成游戏低模。
+```
+
+```text
+主要对象:
+  receiver: ak47t3_receiver_milled_pass3
+  receiver_cover: ak47t3_receiver_cover_arched_pass3
+  receiver_cut: ak47t3_receiver_cut_left/right_shadow_pass3 + rim
+  barrel: ak47t3_barrel_pass3
+  muzzle_nut: ak47t3_muzzle_nut_pass3
+  gas_tube: ak47t3_gas_tube_pass3
+  gas_block: ak47t3_pass3c_gas_block_sloped
+  front_sight: ak47t3_pass3c_front_sight_base / left_ear / right_ear
+  rear_sight: ak47t3_rear_sight_block_pass3 / leaf_pass3
+  stock: ak47t3_stock_wood_pass3
+  lower_handguard: ak47t3_lower_handguard_pass3
+  upper_handguard: ak47t3_upper_handguard_pass3
+  pistol_grip: ak47t3_pass3c_pistol_grip
+  magazine: ak47t3_magazine_forward_curve_pass3
+  charging_handle: ak47t3_pass3c_charging_handle_stem / knob
+```
+
+```text
+弹匣方向修正:
+  对象: ak47t3_magazine_forward_curve_pass3
+  center_yz:
+    -0.112 / -0.050
+    -0.132 / -0.105
+    -0.170 / -0.173
+    -0.218 / -0.246
+    -0.264 / -0.304
+  half_depth:
+    0.018, 0.024, 0.029, 0.031, 0.026
+  half_x:
+    0.026, 0.029, 0.031, 0.031, 0.028
+  验证:
+    - 从顶部到底部，center_y 从 -0.112 到 -0.264，说明底部向枪口方向 -Y 前弯。
+    - 侧面预览中底板位于弹匣前下方，不再反向。
+```
+
+```text
+pass3c 新增识别细节:
+  - 右侧拉机柄: ak47t3_pass3c_charging_handle_stem / knob
+  - 弹匣前 lug: ak47t3_pass3c_magazine_front_lug
+  - 弹匣后卡榫: ak47t3_pass3c_magazine_rear_catch
+  - 后部 trunnion / 枪托衔接视觉: ak47t3_pass3c_rear_trunnion_cap / stock_tang_shadow
+  - 前端斜面导气箍: ak47t3_pass3c_gas_block_sloped
+  - 窄化准星护耳: ak47t3_pass3c_front_sight_left_ear / right_ear
+```
+
+```text
+pass3c 材质:
+  金属: ak47t3_pass3b_dark_blued_steel
+  磨损边/小金属件: ak47t3_pass3b_worn_edges
+  阴影: ak47t3_pass3b_shadow_black
+  木材: ak47t3_pass3b_lacquered_wood
+  木纹/沟槽线: ak47t3_pass3b_dark_wood_lines
+```
+
+```text
+pass3c 预览输出:
+  侧面预览: assets/blender/previews/traditional-ak47-type3-profile-pass3c-side.png
+  3/4 预览: assets/blender/previews/traditional-ak47-type3-profile-pass3c-3q.png
+```
+
 ## 参考来源
 
 - Small Arms Survey AK-47 识别资料：`https://www.smallarmssurvey.org/sites/default/files/SAS-weapons-assault-rifles-Kalashnikov-AK-47.pdf`
@@ -545,6 +619,51 @@ Blender 上向: +Z
 备份批次: model-backups/20260612-160810-blender-models.zip
 ```
 
+### 2026-06-12 16:51
+
+```text
+对应 Blender 文件: assets/blender/sources/weapons/traditional-ak47-type3/traditional-ak47-type3.blend
+调整对象: AK-47 Type 3 profile pass 3c 低模基线重建
+调整前:
+  - refine pass 1 / silhouette pass 2 仍存在整体不成形问题。
+  - 早期弹匣方向错误，底部曾向错误方向弯曲。
+  - 木件、机匣、导气系统、准星和握把存在方块化、比例僵硬问题。
+  - 预览相机曾裁切太近，不能完整评估轮廓。
+调整后:
+  - 清空旧 AK 对象后以侧面轮廓优先方式重建 profile pass 3。
+  - pass3b 修复材质节点写入和曝光问题，避免预览全白。
+  - pass3c 修正前端导气箍、准星护耳、弹匣井过渡、右侧拉机柄和握把轮廓。
+  - 弹匣明确修正为底部朝枪口方向 -Y 前弯。
+  - 重新导出 GLB 并同步到 Godot 运行时路径。
+  - 生成可用于评审的完整侧面和 3/4 预览图。
+调整原因:
+  - 用户指出上一轮模型不成形，尤其弹匣方向错误。
+  - 需要建立一个更可靠的低模基线，后续再做精修和第一人称集成。
+验证方式:
+  - 独立 BlenderMCP 端口 9877 执行 pass3 / pass3b / pass3c 脚本成功。
+  - Blender 场景信息返回 scene object_count=67、materials_count=24。
+  - 关键对象存在:
+    ak47t3_magazine_forward_curve_pass3
+    ak47t3_receiver_milled_pass3
+    ak47t3_stock_wood_pass3
+    ak47t3_pass3c_charging_handle_stem
+  - 场景记录 magazine_orientation=bottom curves forward toward muzzle (-Y)。
+  - 挂点位置已验证:
+    muzzle_point=(0.000, -0.578, -0.001)
+    aim_point=(0.000, -0.536, 0.103)
+    grip_point=(0.000, 0.012, -0.102)
+    magazine_socket=(0.000, -0.112, -0.047)
+  - 确认 .blend 文件约 159K，导出 .glb 文件约 216K，Godot 运行时 .glb 文件约 216K。
+  - 侧面预览 traditional-ak47-type3-profile-pass3c-side.png 显示完整轮廓、弹匣方向正确、木件和机匣比例比 pass1 更稳定。
+  - 3/4 预览 traditional-ak47-type3-profile-pass3c-3q.png 确认右侧拉机柄、前端瞄具和护木不再明显穿帮。
+  - make backup-models 成功打包 .blend、导出 GLB、Godot 运行时 GLB 和全部预览图。
+局限:
+  - 当前仍是程序化低模基线，不是最终精模。
+  - 机匣盖曲面、准星细节、表尺刻度、导气块真实形状、弹匣板筋和木件拓扑仍需后续手工/半手工精化。
+  - 第一人称持枪位置尚未在 Godot 中验证。
+备份批次: model-backups/20260612-165035-blender-models.zip
+```
+
 ## 下一步细化记录
 
 ```text
@@ -553,20 +672,22 @@ Blender 上向: +Z
   - 细化铣削机匣侧面大型减重槽，替换当前黑色标记块。
   - 细化上下护木弧面。
   - 优化弹匣曲率和厚度。
+  - 修正弹匣方向，确保底部朝枪口方向 -Y 前弯。
   - 添加基本木纹方向和材质区分。
   - 添加第一人称握持点、瞄准点、枪口点和弹匣插槽空对象。
+  - 重建 profile pass 3c 作为当前低模基线。
 
 优先级 1:
-  - 从第一人称视角检查机匣盖、表尺、准星和护木遮挡关系。
-  - 调整准星座、导气箍、照门座高度关系。
-  - 将枪管、导气管、导气箍和通条从 blockout 细化为更接近 AK Type 3 的外观轮廓。
+  - 在 Godot 中创建导入检查场景，验证 GLB 尺寸、朝向、挂点和第一人称持枪位置。
+  - 从第一人称视角检查机匣盖、表尺、准星、护木和弹匣遮挡关系。
+  - 根据 Godot 检查结果微调 muzzle_point、aim_point、grip_point 和 magazine_socket。
 
 优先级 2:
-  - 细化扳机护圈、扳机、弹匣卡榫和选择杆形状。
-  - 给机匣盖增加弧面轮廓，而不是保持长方体。
-  - 检查挂点在 Godot 中的坐标方向和动画使用方式。
+  - 将机匣盖、导气箍、准星座、表尺从低模轮廓提升为更干净的曲面/半精模。
+  - 细化扳机护圈、扳机、弹匣卡榫、选择杆和右侧拉机柄。
+  - 优化弹匣筋条、底板和供弹口形状。
 
 优先级 3:
-  - 在 Godot 中创建导入检查场景。
   - 添加第一人称展示用相机、手臂占位和基础持枪姿态。
+  - 建立后续精模所需的参考图/轮廓模板流程，减少纯坐标猜测。
 ```
