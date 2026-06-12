@@ -25,6 +25,7 @@ arms/
 - Blender 资产模块：查看 `assets/blender/README.md`
 - 资产制作流程：查看 `assets/blender/docs/pipeline.md`
 - BlenderMCP 状态：查看 `assets/blender/docs/blender-mcp.md`
+- 模型文件备份：运行 `make backup-models`，再把 `model-backups/` 里的压缩包手动上传云盘
 
 ## 当前阶段
 

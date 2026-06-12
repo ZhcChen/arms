@@ -13,6 +13,35 @@
 apps/arms-game/builds/
 apps/arms-game/exports/
 
+# Local Godot runtime model files generated from Blender exports.
+apps/arms-game/assets/weapons/*
+!apps/arms-game/assets/weapons/.gitkeep
+
+# Local Blender model source and generated asset files.
+# Keep only docs/catalog/placeholders in git; archive these directories manually.
+assets/blender/sources/*
+!assets/blender/sources/.gitkeep
+!assets/blender/sources/weapons/
+assets/blender/sources/weapons/*
+!assets/blender/sources/weapons/.gitkeep
+assets/blender/exports/*
+!assets/blender/exports/.gitkeep
+!assets/blender/exports/godot/
+assets/blender/exports/godot/*
+!assets/blender/exports/godot/weapons/
+assets/blender/exports/godot/weapons/*
+!assets/blender/exports/godot/weapons/.gitkeep
+assets/blender/textures/*
+!assets/blender/textures/.gitkeep
+assets/blender/previews/*
+!assets/blender/previews/.gitkeep
+assets/blender/references/*
+!assets/blender/references/.gitkeep
+
+# Manual model backup archives. Upload generated archives to cloud storage.
+model-backups/*
+!model-backups/README.md
+
 # Blender generated files
 *.blend1
 *.blend2

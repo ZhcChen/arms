@@ -11,7 +11,9 @@
 3. 导出 `.glb` 到 `assets/blender/exports/godot/weapons/<weapon-id>/`。
 4. 复制或同步 `.glb` 到 `apps/arms-game/assets/weapons/<weapon-id>/`。
 5. 用 Godot 打开 `apps/arms-game/project.godot`，检查导入结果。
-6. 提交源文件、导出物、Godot `.import` 配置和对应制作记录。
+6. 提交 Godot `.import` 配置和对应制作记录；模型源文件和导出物不提交 Git。
+7. 运行 `make backup-models` 生成本地模型备份压缩包。
+8. 将 `model-backups/` 中最新压缩包人工上传到云盘。
 
 ## 初始约定
 
@@ -25,7 +27,10 @@
 
 ## 版本控制
 
-- `.blend`、`.glb`、贴图、音频等大资产建议使用 Git LFS。
-- 当前本机未检测到 `git lfs`，真实大资产进入仓库前应先安装并执行 LFS 初始化。
+- `.blend`、`.glb`、贴图、预览图和参考图等大资产默认不提交 Git。
+- `assets/blender/sources/`、`assets/blender/exports/`、`assets/blender/textures/`、`assets/blender/previews/`、`assets/blender/references/` 的真实内容由 `.gitignore` 忽略。
+- `apps/arms-game/assets/weapons/` 下由 Blender 导入或同步的真实武器模型也不提交 Git。
+- 模型资产通过 `make backup-models` 压缩到 `model-backups/` 后手动备份到云盘。
+- `model-backups/` 中的压缩包也不提交 Git，只提交目录说明。
 - Godot `.godot/` 缓存不提交。
 - Godot `.import` 文件后续应提交。
