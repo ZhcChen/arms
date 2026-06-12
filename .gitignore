@@ -1,0 +1,25 @@
+# macOS / editor noise
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Godot generated cache
+**/.godot/
+**/.import/
+*.translation
+
+# Godot export output
+apps/arms-game/builds/
+apps/arms-game/exports/
+
+# Blender generated files
+*.blend1
+*.blend2
+*.blend@
+*.blend~
+*.tmp
+
+# Local logs and scratch
+*.log
+.context/

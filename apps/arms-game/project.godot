@@ -1,0 +1,14 @@
+; Engine configuration file.
+; Open this directory with Godot 4.x.
+
+config_version=5
+
+[application]
+
+config/name="Arms"
+config/description="First-person weapon showcase and handling prototype."
+config/features=PackedStringArray("4.0", "Forward Plus")
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
